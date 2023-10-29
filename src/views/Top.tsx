@@ -23,7 +23,7 @@ console.log(props.items);
       {props.items.map((item) => {
         return (
         <li key={item.id}>
-          <a href={`/admin/posts/${item.id}`}><h3 class="text-3xl font-bold"
+          <a href={`/posts/${item.id}`}><h3 class="text-3xl font-bold"
           >{item.title}</h3></a>
           <p>id={item.id}, {item.createdAt}</p>
           <hr />
@@ -46,6 +46,7 @@ console.log(props.items);
 }
 export default Top;
 /*
+http://127.0.0.1:8787/posts/1
 <ul>
   {props.messages.map((message) => {
     return (<li class="my-2" >{message}!!</li>)

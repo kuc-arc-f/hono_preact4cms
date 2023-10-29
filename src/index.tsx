@@ -11,6 +11,8 @@ import taskRouter from './routes/tasks';
 import postRouter from './routes/posts';
 /* views */
 import Top from './views/Top';
+import {PostShow} from './views/posts/show/App';
+
 import {Csr1} from './views/csr1/App';
 import {Csr2} from './views/csr2/App';
 import {Ssr1} from './views/ssr1/App';
@@ -36,15 +38,13 @@ interface Env {
 //
 export const app = new Hono()
 //basicAuth
-/*
 app.use(
-  "/*",
+  "/admin/*",
   basicAuth({
     username: "test",
     password: "1111",
   })
 );
-*/
 //serveStatic
 app.get('/static/*', serveStatic({ root: './' }))
 app.get('/js/*', serveStatic({ root: './' }))
@@ -53,12 +53,18 @@ app.get('/styles/*', serveStatic({ root: './' }))
 * route
 */
 app.get('/', async (c) => {
-//  const messages = ['Good Morning', 'Good Evening', 'Good Night']
   let page = c.req.query('page');
   if(!page) { page = '1';}
 console.log("page=", page);
   const items = await postRouter.get_list_page(c, c.env.DB, page);
   return c.html(<Top items={items} page={page} />)
+});
+//
+app.get('/posts/:id', async (c) => { 
+  const {id} = c.req.param();
+  const item = await postRouter.get(c, c.env.DB, id);
+console.log("id=", id);
+  return c.html(<PostShow item={item} id={Number(id)} />)
 });
 const testItems = [
   {id: 1, title: "title_1"},
