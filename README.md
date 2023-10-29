@@ -6,12 +6,14 @@
 
  date    : 2023/10/28
 
- update  : 2023/10/29
+ update  : 2023/10/29 
 
 ***
 ### Summary
 
 preact.js + hono + workers + D1, CMS sample
+
+* /admin : editor pages
 
 ***
 ### wrangler.toml
