@@ -31,6 +31,12 @@ console.log(props.items);
             <a href={`/admin/posts/${item.id}`}><h3 class="text-3xl font-bold"
             >{item.title}</h3></a>
             <p>id={item.id}, {item.createdAt}</p>
+            <a href={`/admin/posts/${item.id}`}>
+              <button class="btn-outline-purple">Show</button>
+            </a>
+            <a href={`/admin/posts/edit/${item.id}`}>
+              <button class="btn-outline-purple ms-2">Edit</button>
+            </a>
             <hr />
           </li>
           );

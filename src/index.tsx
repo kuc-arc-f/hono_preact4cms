@@ -31,7 +31,8 @@ import {AdminIndex} from './views/admin/App';
 import {AdminPostIndex} from './views/admin/posts/App';
 import {AdminPostCreate} from './views/admin/posts/create/App';
 import {AdminPostShow} from './views/admin/posts/show/App';
-//
+import {AdminPostEdit} from './views/admin/posts/edit/App';
+////
 interface Env {
   DB: Database
 }
@@ -136,6 +137,13 @@ console.log("id=", id);
 //console.log(item);
   return c.html(<AdminPostShow item={item} id={Number(id)} />);
 });
+app.get('/admin/posts/edit/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await postRouter.get(c, c.env.DB, id);
+//console.log(item);
+  return c.html(<AdminPostEdit item={item} id={Number(id)} />);
+});
 /**
 * API
 */
@@ -182,6 +190,11 @@ app.post('/api/posts/get_list', async (c) => {
 app.post('/api/posts/create', async (c) => { 
   const body = await c.req.json();
   const resulte = await postRouter.create(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/posts/update', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await postRouter.update(body, c.env.DB);
   return c.json(resulte);
 });
 app.post('/api/posts/get', async (c) => { 

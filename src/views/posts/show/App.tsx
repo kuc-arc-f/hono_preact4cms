@@ -29,5 +29,5 @@ console.log(props);
 )
 }
 /*
-            {html`<script type="text/babel" src="/js/posts/show.js?${timeStamp}"></script>`}  
+{html`<script type="text/babel" src="/js/posts/show.js?${timeStamp}"></script>`}  
 */

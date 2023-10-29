@@ -109,8 +109,6 @@ console.log(sql);
      *
      * @return
      */    
-    //(c, c.env.DB, id)
-//    get: async function(body, c, DB)
     get: async function(c, DB, id)
     {
         //console.log("#get");
@@ -175,6 +173,30 @@ console.log(sql);
             return {ret: "NG", data: body};
         } 
     },
-
+    /**
+     * 
+     * @param
+     *
+     * @return
+     */    
+    update: async function(body, DB)
+    {
+        try{    
+console.log(body);
+            if (body) {
+                const sql = `
+                UPDATE Post 
+                SET title = '${body.title}', content='${body.content}'
+                WHERE id = ${body.id}
+                `;
+console.log(sql);
+                await DB.prepare(sql).run();
+            }
+            return {ret: "OK", data: body};
+        } catch (e) {
+            console.error(e);
+            return [];
+        } 
+    },
 }
 export default Router;
